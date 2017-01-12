@@ -1,0 +1,13 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "main": "./main.js",
+  "author": {
+    "name": "Harry",
+    "email": "weihong1028@gmail.com",
+    "url": "https://github.com/weihong1028"
+  },
+  "license": "MIT",
+  "dependencies": {
+  }
+}
