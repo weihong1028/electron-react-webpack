@@ -16,7 +16,7 @@
     {
       const script = document.createElement('script');
       const port = 8000;
-      script.src = (process.env.REACT_WEBPACK_ENV == 'dev')
+      script.src = (process.env.REACT_WEBPACK_ENV && process.env.REACT_WEBPACK_ENV == 'dev')
         ? 'http://localhost:' + port + '/app.js'
         : './dist/app.js';
       // HACK: Writing the script path should be done with webpack

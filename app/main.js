@@ -25,7 +25,7 @@ function createWindow () {
   });
 
   // and load the index.html of the app.
-  if (process.env.REACT_WEBPACK_ENV == 'dev') {
+  if (process.env.REACT_WEBPACK_ENV && process.env.REACT_WEBPACK_ENV == 'dev') {
     mainWindow.loadURL("http://localhost:8000");
     // Open the DevTools.
     mainWindow.webContents.openDevTools();
