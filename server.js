@@ -22,9 +22,12 @@ new WebpackDevServer(compiler, config.devServer)
     console.log(err);
   }
   if (argv.env) {
-  ChildProcess.spawn('npm', ['run', 'electron'], { shell: true, env: process.env, stdio: 'inherit' })
-    .on('close', code => process.exit(code))
-    .on('error', spawnError => console.error(spawnError));
+    ChildProcess.spawn('npm', ['run', 'electron'], { shell: true, env: process.env, stdio: 'inherit' })
+      .on('close', code => process.exit(code))
+      .on('error', spawnError => console.error(spawnError));
+    ChildProcess.spawn('npm', ['run', 'proxy'], { shell: true, env: process.env, stdio: 'inherit' })
+      .on('close', code => process.exit(code))
+      .on('error', spawnError => console.error(spawnError));
   }
   console.log('Listening at localhost:' + config.port);
 });
