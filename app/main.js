@@ -1,9 +1,6 @@
-const electron = require('electron');
-// Module to control application life.
-const app = electron.app;
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow;
-const clipboard = require('electron').clipboard;
+const electron = require('electron'); // Module to control application life.
+const app = electron.app; // Module to create native browser window.
+const BrowserWindow = electron.BrowserWindow; // Module to create browser window
 
 const path = require('path');
 const url = require('url');
@@ -11,8 +8,91 @@ const url = require('url');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
-app.commandLine.appendSwitch('ignore-certificate-errors');
-clipboard.writeText(__dirname, 'dirname');
+// menu template
+const menuTemplate = [
+  {
+    label: 'Edit',
+    submenu: [
+      {
+        role: 'undo'
+      },
+      {
+        role: 'redo'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        role: 'cut'
+      },
+      {
+        role: 'copy'
+      },
+      {
+        role: 'paste'
+      },
+      {
+        role: 'pasteandmatchstyle'
+      },
+      {
+        role: 'delete'
+      },
+      {
+        role: 'selectall'
+      }
+    ]
+  },
+  {
+    label: 'View',
+    submenu: [
+      {
+        role: 'reload'
+      },
+      {
+        role: 'toggledevtools'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        role: 'resetzoom'
+      },
+      {
+        role: 'zoomin'
+      },
+      {
+        role: 'zoomout'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        role: 'togglefullscreen'
+      }
+    ]
+  },
+  {
+    role: 'window',
+    submenu: [
+      {
+        role: 'minimize'
+      },
+      {
+        role: 'close'
+      }
+    ]
+  },
+  {
+    role: 'help',
+    submenu: [
+      {
+        label: 'Learn More',
+        click () { require('electron').shell.openExternal('http://electron.atom.io') }
+      }
+    ]
+  }
+];
+app.commandLine.appendSwitch('ignore-certificate-errors'); // 忽略浏览器证书错误(https)
 
 function createWindow () {
   // Create the browser window.

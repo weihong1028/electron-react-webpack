@@ -11,18 +11,19 @@
     "ie >= 9"
   ],
   "scripts": {
+    "asar": "asar pack ./app/dist ./app/app.asar",
     "clean": "rimraf /app/dist/*",
     "copy": "copyfiles -f ./app/index.html ./app/dist",
-    "dist": "webpack --env=dist",
+    "dist": "webpack --env=dist && npm run asar",
+    "electron": "electron ./app/",
     "lint": "eslint ./app",
     "posttest": "npm run lint",
+    "proxy": "node server.proxy.https.js",
     "release:major": "npm version major && npm publish && git push --follow-tags",
     "release:minor": "npm version minor && npm publish && git push --follow-tags",
     "release:patch": "npm version patch && npm publish && git push --follow-tags",
-    "electron": "electron ./app/",
-    "proxy": "node server.proxy.js",
     "serve": "node server.js --env=dev",
-    "serve:dist": "node server.js --env=dist",
+    "serve:dist": "npm run dist && npm run electron",
     "start": "node server.js --env=dev",
     "test": "karma start",
     "test:watch": "karma start --autoWatch=true --singleRun=false"
@@ -34,6 +35,7 @@
   "keywords": [],
   "author": "Harry",
   "devDependencies": {
+    "asar": "^0.13.0",
     "babel-core": "^6.0.0",
     "babel-eslint": "^6.0.0",
     "babel-loader": "^6.0.0",

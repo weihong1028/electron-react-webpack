@@ -21,10 +21,12 @@ new WebpackDevServer(compiler, config.devServer)
   if (err) {
     console.log(err);
   }
-  if (argv.env) {
+  if (argv.env === 'dev') {
+    // open electron app
     ChildProcess.spawn('npm', ['run', 'electron'], { shell: true, env: process.env, stdio: 'inherit' })
       .on('close', code => process.exit(code))
       .on('error', spawnError => console.error(spawnError));
+    // set app proxy
     ChildProcess.spawn('npm', ['run', 'proxy'], { shell: true, env: process.env, stdio: 'inherit' })
       .on('close', code => process.exit(code))
       .on('error', spawnError => console.error(spawnError));
